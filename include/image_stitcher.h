@@ -38,21 +38,22 @@ class ImageStitcher{
   image_transport::Publisher image_pub_;
   message_filters::Synchronizer<ApproxSyncPolicy> sync;
   Mat homography;
-  bool show_image=true;
+  bool show_image;
 
 public:
-  ImageStitcher(string, string, int);
+  ImageStitcher(string, string, int, bool);
   ~ImageStitcher();
   void callback(const sensor_msgs::ImageConstPtr& left_msg, const sensor_msgs::ImageConstPtr& right_msg);
   void calibrate(Mat, Mat);
 };
 
-ImageStitcher::ImageStitcher(string left, string right, int buffersize):it_(nh_),
+ImageStitcher::ImageStitcher(string left, string right, int buffersize, bool debugscreen = false):it_(nh_),
   left_sub(it_, left, buffersize),
   right_sub(it_, right, buffersize),
   sync(ApproxSyncPolicy(buffersize), left_sub, right_sub){
   sync.registerCallback( boost::bind( &ImageStitcher::callback, this, _1, _2 ) );
-  image_pub_ = it_.advertise("/stitched_images/output_video", buffersize);
+  image_pub_ = it_.advertise("/stitched_images/output", buffersize);
+  show_image = debugscreen;
   if (show_image) cv::namedWindow(OPENCV_WINDOW);
 }
 

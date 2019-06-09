@@ -21,7 +21,7 @@ int main(int argc, char** argv){
       return 1;
   }
   
-  ImageStitcher ic(left, right, 10);
+  ImageStitcher ic(left, right, 10, false);
   ros::spin();
   return 0;
 }
