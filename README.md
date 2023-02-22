@@ -18,3 +18,13 @@ _The steps 1-3 are only performed for the first frames. Once the homography matr
 ## Todo
 - [ ] Calculate homography on demand
 - [ ] Provide homography as input
+
+## Cite
+```
+@book{binnani2019vision,
+  title={Vision-based Autonomous Driving},
+  author={Binnani, Sumit},
+  year={2019},
+  publisher={University of California, San Diego}
+}
+```
